@@ -15,20 +15,17 @@ export enum UserActionTypes {
 }
 
 export interface IUser {
-  id: number;
-  name: string;
-  cpf: string;
+  id?: number;
+  name?: string;
+  cpf?: string;
   email: string;
-  phoneNumber: string;
-  pis: string;
-  born: Date;
-  hired: Date;
-  videoAccept: boolean;
-  termsAccept: boolean;
+  phoneNumber?: string;
+  pis?: string;
+  born?: Date;
+  hired?: Date;
+  videoAccept?: boolean;
+  termsAccept?: boolean;
+  password?: string;
 }
 
-export interface UserState {
-  readonly loggedUser: IUser | null;
-  readonly selectedUser: IUser | null;
-  readonly users: Array<IUser> | null;
-}
+
