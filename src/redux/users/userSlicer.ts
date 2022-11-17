@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { callbackify } from "util";
 import { getUser, postJwtLogin } from "../../api";
+import { setLoggedInUser } from "../../helpers/authentication_helper";
 import { RootState } from "../store";
 import { IUser } from "./types";
 
@@ -48,7 +49,7 @@ export const counterSlice = createSlice({
         state.loggedUser = null;
       })
       .addCase(login.fulfilled, (state: any, action: any) => {
-        console.log(action)
+        setLoggedInUser(action.payload);
         state.loggedUser = action.payload;
       })
       .addCase(login.rejected, (state: any) => {

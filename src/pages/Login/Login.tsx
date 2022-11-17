@@ -1,20 +1,31 @@
 import { Button, Col, Form, FormControl, FormGroup, FormLabel, Row } from "react-bootstrap"
 import { FaUserCircle } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { useAppDispatch } from "../../app/hooks";
-import { login, loginAction } from "../../redux/users/userSlicer";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { login, loginAction, user } from "../../redux/users/userSlicer";
 import { useForm } from "react-hook-form";
-import { useCallback } from "react";
+import { useCallback, useLayoutEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const dispatch = useAppDispatch();
+  const loggedUser = useAppSelector(user);
+  const navigate = useNavigate();
+
 
   const onSubmit = useCallback(
     (data: any) => {
-      dispatch(login({ email: data?.email, password: data?.password }))
+      dispatch(login({ email: data?.email, password: data?.password }, ))
     }, [dispatch]
   );
+
+  useLayoutEffect(()=>{
+    if(loggedUser && loggedUser?.id){
+      console.log(loggedUser);
+      navigate('/dashboard');
+    }
+  },[loggedUser])
   return (
     <div className="d-flex justify-content-center bg-dark w-100 align-items-center position-absolute bottom-0 top-0">
       <Col
