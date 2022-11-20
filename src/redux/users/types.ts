@@ -1,3 +1,4 @@
+import { IPermission } from "../permission/types";
 
 export enum UserActionTypes {
   API_RESPONSE_SUCCESS = "@@users/API_RESPONSE_SUCCESS",
@@ -26,6 +27,7 @@ export interface IUser {
   videoAccept?: boolean;
   termsAccept?: boolean;
   password?: string;
+  permission?: IPermission;
 }
 
 

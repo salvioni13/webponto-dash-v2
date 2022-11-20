@@ -1,14 +1,25 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { RiDashboardFill, RiRegisteredLine } from "react-icons/ri"
 import { FiSettings } from "react-icons/fi"
 import { Dropdown } from "react-bootstrap";
-const Dashboard = () => {
+import { authentication } from "../../redux/users/userSlicer";
+import { useAppDispatch } from "../../hooks";
+import { useAppSelector } from "../../app/hooks";
+const AdminDashboard = () => {
+
+  const {Users: {loggedUser }} = useAppSelector((state)=> ({Users: state.Users}))
   const [configIsOpen, setConfigIsOpen] = useState<boolean>(false);
 
   const [profileIsOpen, setProfileIsOpen] = useState<boolean>(false);
 
   const toggleProfile = () => setProfileIsOpen((prevState) => !prevState);
   const toggleSettings = () => setConfigIsOpen((prevState) => !prevState);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if(!loggedUser || loggedUser === undefined)
+    dispatch(authentication());
+  }, [dispatch])
 
   const year = new Date().getFullYear();
   return (
@@ -642,4 +653,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default AdminDashboard

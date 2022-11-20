@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { callbackify } from "util";
-import { getUser, postJwtLogin } from "../../api";
+import { getUser, postAuthenticate, postJwtLogin } from "../../api";
 import { setLoggedInUser } from "../../helpers/authentication_helper";
 import { RootState } from "../store";
 import { IUser } from "./types";
@@ -9,9 +9,11 @@ export interface UserState {
   readonly loggedUser: IUser | null;
   readonly selectedUser: IUser | null;
   readonly users: Array<IUser> | null;
+  readonly isRequesting: boolean;  
 }
 
 export const initialState: UserState = {
+  isRequesting: false,
   loggedUser: null,
   selectedUser: null,
   users: null,
@@ -30,17 +32,23 @@ export const login = createAsyncThunk(
   }
 );
 
+export const authentication = createAsyncThunk(
+  "users/authentication",
+  async () => {
+    const response = await postAuthenticate();
+    return response;
+  }
+);
+
+
 export const counterSlice = createSlice({
-  name: "counter",
+  name: "user",
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    loginAction: (state, action) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.loggedUser = action?.payload?.data;
+    setLoggedUser: (state, action: any) => {
+      console.log(action);
+      state.loggedUser = action.payload.data;
     },
   },
   extraReducers: (builder) => {
@@ -48,17 +56,27 @@ export const counterSlice = createSlice({
       .addCase(login.pending, (state: any) => {
         state.loggedUser = null;
       })
+      .addCase(login.rejected, (state: any) => {
+        state.status = "failed";
+      })
       .addCase(login.fulfilled, (state: any, action: any) => {
         setLoggedInUser(action.payload);
         state.loggedUser = action.payload;
       })
-      .addCase(login.rejected, (state: any) => {
+      .addCase(authentication.pending, (state: any) => {
+        state.loggedUser = null;
+      })
+      .addCase(authentication.rejected, (state: any) => {
         state.status = "failed";
-      });
+      })
+      .addCase(authentication.fulfilled, (state: any, action: any) => {
+        setLoggedInUser(action.payload);
+        state.loggedUser = action.payload;
+      })
   },
 });
 
-export const { loginAction } = counterSlice.actions;
+export const {setLoggedUser} = counterSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

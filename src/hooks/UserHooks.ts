@@ -28,18 +28,22 @@ const useProfile = () => {
 
 const usePermission = () => {
   const { useAppSelector } = useRedux();
-  const { permission } = useAppSelector((state: any) => ({
-    permission: state.Users.loggedUser.permission
+  const { loggedUser } = useAppSelector((state) => ({
+    loggedUser: state.Users.loggedUser
   }));
 
-  const result = useMemo(
-    () => ({
-      admin: Boolean(permission?.id === 1),
-      user: Boolean(permission?.id !== 1 && permission !== undefined)
-    }),
-    [permission]
-  );
+    
+    const result = useMemo(
+      () => ({
+        admin: Boolean(loggedUser?.permission?.id === 1),
+        user: Boolean(loggedUser?.permission?.id !== 1 && loggedUser?.permission !== undefined)
+      }),
+      [loggedUser]
+    );
+  
+    return result;
+    
+  
 
-  return result;
 }
 export { useProfile, usePermission };

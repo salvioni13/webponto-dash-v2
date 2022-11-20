@@ -2,7 +2,7 @@ import { Button, Col, Form, FormControl, FormGroup, FormLabel, Row } from "react
 import { FaUserCircle } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { login, loginAction, user } from "../../redux/users/userSlicer";
+import { login, user } from "../../redux/users/userSlicer";
 import { useForm } from "react-hook-form";
 import { useCallback, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
