@@ -1,0 +1,25 @@
+*::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+*::-webkit-scrollbar:vertical {
+    width: 12px;
+}
+
+*::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--primary300);
+    border-radius: 10px;
+    border: none;
+}
+
+*::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+*::-webkit-scrollbar-corner {
+    display: none;
+}

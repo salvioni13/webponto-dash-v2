@@ -1,0 +1,28 @@
+$default: #344675 !default;
+$primary: rgb(0, 71, 204) !default;
+$primary300: #003392 !default;
+$secondary: #f4f5f7 !default;
+$success: #00f2c3 !default;
+$info: #1d8cf8 !default;
+$warning: #ff8800 !default;
+$danger: #ff2222 !default;
+$dark: #222a42 !default;
+$white: #eee !default;
+$dark: #111111 !default;
+$black: #000;
+$default-dark: #344675 !default;
+$primary-dark: rgb(0, 71, 204) !default;
+$primary300-dark: #003392 !default;
+$secondary-dark: #0b0a08 !default;
+$success-dark: #00f2c3 !default;
+$info-dark: #1d8cf8 !default;
+$warning-dark: #ff8800 !default;
+$danger-dark: #ff2222 !default;
+$black-dark: #222a42 !default;
+$white-dark: #eee !default;
+$dark-dark: #111111 !default;
+$black-dark: #000;
+$theme-colors: map-merge( ( "default": $default, "primary": $primary, "primary300": $primary300, "secondary": $secondary, "success": $success, "info": $info, "warning": $warning, "danger": $danger, "white": $white, "neutral": $white, "dark": $dark, "darker": $darker, ), $theme-colors);
+body[data-layout-mode="dark"] {
+    $theme-colors: map-merge( ( "default": $default-dark, "primary": $primary-dark, "primary300": $primary300-dark, "secondary": $secondary-dark, "success": $success-dark, "info": $info-dark, "warning": $warning-dark, "danger": $danger-dark, "white": $white-dark, "neutral": $white-dark, "dark": $dark-dark, "darker": $darker-dark, ), $theme-colors);
+}

@@ -32,7 +32,7 @@ const AdminDashboard = () => {
                 @SG
               </a>
               <a href="" className="simple-text logo-normal">
-                System
+                System 
               </a>
             </div>
             <ul className="nav">
@@ -59,7 +59,6 @@ const AdminDashboard = () => {
                   </button>
                 </div>
                 <a className="navbar-brand" href="">
-
                   Dashboard
                 </a>
               </div>

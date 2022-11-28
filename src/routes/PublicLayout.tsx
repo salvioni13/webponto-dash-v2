@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Navigate, useOutlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -14,16 +14,8 @@ export const PublicLayout = () => {
   const permission = usePermission();
   const dispatch = useAppDispatch();
   const {loggedUser} = useAppSelector((state)=>({loggedUser: state.Users.loggedUser})) 
-
-  if (userProfile) {
-    // dispatch(authentication());
-
-    
-    
-
-  }
   
-  useLayoutEffect(()=>{
+  useEffect(()=>{
     if(loggedUser && loggedUser !== undefined){
       if(permission.admin){
         navTo("/admin")
@@ -33,8 +25,6 @@ export const PublicLayout = () => {
         navTo("/")
       }
     }
-
-
   },[loggedUser])
 
 
