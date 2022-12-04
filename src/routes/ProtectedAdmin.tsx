@@ -1,7 +1,6 @@
 import { useEffect, useLayoutEffect } from "react";
 import { Link, Navigate, useNavigate, useOutlet } from "react-router-dom";
-import { useAppSelector } from "../app/hooks";
-import { useAppDispatch, usePermission, useProfile } from "../hooks";
+import { useAppDispatch, useAppSelector, usePermission, useProfile } from "../hooks";
 import { authentication } from "../redux/users/userSlicer";
 
 export const ProtectedAdmin = () => {

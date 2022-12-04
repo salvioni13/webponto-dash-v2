@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { RiDashboardFill, RiRegisteredLine } from "react-icons/ri"
 import { FiSettings } from "react-icons/fi"
-import { Dropdown } from "react-bootstrap";
 const UsersDashboard = () => {
   const [configIsOpen, setConfigIsOpen] = useState<boolean>(false);
 
@@ -27,7 +26,6 @@ const UsersDashboard = () => {
             <ul className="nav">
               <li className="active d-flex align-items-center">
                 <a className="d-flex align-items-center gap-2">
-
                   <RiDashboardFill className="font-size-1" />
                   <p className="m-0 p-0 font-size-1">Dashboard</p>
                 </a>

@@ -7,24 +7,19 @@ import { PublicLayout } from './routes/PublicLayout';
 import UsersDashboard from './pages/Users/UsersDashboard';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import { ProtectedUser } from './routes/ProtectedUser';
-import { useAppDispatch } from './hooks';
-import { useAppSelector } from './app/hooks';
-import { info } from 'console';
+import { useAppDispatch, useAppSelector } from './hooks';
 import { changeLayoutMode } from './redux/layout/layoutSlicer';
-
+import './main.css';
 
 
 function App() {
-
   const dispatch = useAppDispatch();
   const {Layout: {viewMode }} = useAppSelector((state)=> ({Layout: state.Layout}))
 
 
-  useLayoutEffect(()=>{
-    if(viewMode === null){
-      dispatch(changeLayoutMode('dark'));
-    }
-  },[dispatch, viewMode])
+
+
+
   return (
     <Routes>
       <Route element={<PublicLayout />}>

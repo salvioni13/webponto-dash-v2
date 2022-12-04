@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { parseCookies } from "nookies";
 
 // default
-axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+axios.defaults.baseURL = import.meta.env.VITE_REACT_APP_API_URL;
 axios.defaults.withCredentials = true;
 
 // content type

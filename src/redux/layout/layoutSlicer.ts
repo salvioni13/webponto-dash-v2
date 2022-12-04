@@ -1,6 +1,4 @@
 import { createAction, createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { callbackify } from "util";
-import { getUser, postAuthenticate, postJwtLogin } from "../../api";
 import { RootState } from "../store";
 
 export interface LayoutState {
@@ -19,9 +17,19 @@ export const initialState: LayoutState = {
 
 
 export const changeLayoutMode = createAsyncThunk(
-  "users/loginAction",
+  "layout/viewMode",
   async (type: 'dark' | 'light') => {
-    document.body.setAttribute('data-layout-mode', type);    
+    // console.log(type);
+    try{
+      document.documentElement.classList.remove('light');      
+      document.documentElement.classList.remove('dark');
+
+      document.documentElement.classList.add(type);
+      localStorage.theme = type;
+    }catch(e){
+      console.log(e);
+    }
+    // document.body.setAttribute('data-layout-mode', type);    
     return type;
   }
 );
@@ -29,7 +37,7 @@ export const changeLayoutMode = createAsyncThunk(
 
 
 
-export const layoutSlice = createSlice({
+export const layoutSlicer = createSlice({
   name: "layout",
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
@@ -53,11 +61,11 @@ export const layoutSlice = createSlice({
   },
 });
 
-export const {setViewMode} = layoutSlice.actions;
+export const {setViewMode} = layoutSlicer.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const layoutReducer= (state: RootState) => state.Layout;
 
-export default layoutSlice.reducer;
+export default layoutSlicer.reducer;

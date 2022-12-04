@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+@tailwind colors;
+*::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+*::-webkit-scrollbar:vertical {
+    width: 12px;
+}
+
+*::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #0ea5e9;
+    border-radius: 10px;
+    border: 2px solid transparent;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: #111827;
+}
+
+*::-webkit-scrollbar-corner {
+    display: none;
+}
+
+*::-webkit-scrollbar-track-piece {
+    display: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}

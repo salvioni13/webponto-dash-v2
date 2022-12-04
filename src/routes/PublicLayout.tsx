@@ -1,8 +1,7 @@
 import { useEffect, useLayoutEffect } from "react";
-import { useDispatch } from "react-redux";
 import { Navigate, useOutlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../hooks";
 import { usePermission, useProfile } from "../hooks";
 import { authentication } from "../redux/users/userSlicer";
 

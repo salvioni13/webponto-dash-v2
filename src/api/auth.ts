@@ -12,8 +12,8 @@ const forgetPwd = (data: any) => {
   });
 };
 
-const postLogout = () =>{
-  api.create(url.POST_LOGOUT, {}, { withCredentials: true });}
+const postLogout = () =>
+  api.create(url.POST_LOGOUT, {}, { withCredentials: true });
 
 const postAuthenticate = () =>
   api.get(url.POST_AUTHENTICATE, { withCredentials: true });
