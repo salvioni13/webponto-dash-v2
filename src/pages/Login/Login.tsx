@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { login, user } from "../../redux/users/userSlicer";
 import { useForm } from "react-hook-form";
-import { useCallback, useLayoutEffect } from "react";
+import { useCallback, useEffect, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -16,14 +16,12 @@ const Login = () => {
 
   const onSubmit = useCallback(
     (data: any) => {
-      console.log(data);
       dispatch(login({ email: data?.email, password: data?.password },))
     }, [dispatch]
   );
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (loggedUser && loggedUser?.id) {
-      console.log(loggedUser);
       navigate('/dashboard');
     }
   }, [loggedUser])

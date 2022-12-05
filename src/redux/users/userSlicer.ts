@@ -47,7 +47,6 @@ export const counterSlice = createSlice({
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     setLoggedUser: (state, action: any) => {
-      console.log(action);
       state.loggedUser = action.payload.data;
     },
   },

@@ -28,7 +28,6 @@ const Topbar = () => {
   }));
 
   const toggleTheme = useCallback(() => {
-    console.log(viewMode === "light" ? "dark" : "light");
     dispatch(changeLayoutMode(viewMode === "light" ? "dark" : "light"))
   }, [dispatch, viewMode])
 

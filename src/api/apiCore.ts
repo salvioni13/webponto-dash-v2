@@ -11,18 +11,17 @@ axios.defaults.headers.post["Content-Type"] = "application/json";
 // intercepting to capture errors
 axios.interceptors.response.use(
   (response) => {
-    console.log("INTERCEPTOR RESPONSE: ", response);
+    // console.log("INTERCEPTOR RESPONSE: ", response);
     return response.data ? response.data : response;
   },
   async function (error) {
     const originalRequest = error.response;
     const retryRequest = error.config;
-    console.log("INTERCEPTOR REQUEST ERROR: ", originalRequest);
+    // console.log("INTERCEPTOR REQUEST ERROR: ", originalRequest);
     if (
       error.config.url === "/authentication/refresh" &&
       error?.response?.status === 401
     ) {
-      console.log("Refresh não funcionou 1");
       return Promise.reject(originalRequest);
     }
     if (
@@ -56,7 +55,6 @@ class APIClient {
    * post given data to url
    */
   create = (url: string, data?: {}, config?: AxiosRequestConfig) => {
-    console.log("entrou aqui", url, data);
     if (config) return axios.post(url, data, config);
     return axios.post(url, data);
   };

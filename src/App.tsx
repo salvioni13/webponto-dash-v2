@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import logo from './logo.svg';
 import { Route, Routes, useRoutes } from 'react-router-dom';
 import Login from './pages/Login/Login';
@@ -14,11 +14,13 @@ import './main.css';
 
 function App() {
   const dispatch = useAppDispatch();
-  const {Layout: {viewMode }} = useAppSelector((state)=> ({Layout: state.Layout}))
+  const {Layout: { viewMode }} = useAppSelector((state)=> ({Layout: state.Layout}))
 
-
-
-
+  const theme = localStorage.theme;
+  useEffect(()=>{
+    if(!viewMode)
+    dispatch(changeLayoutMode(theme ? theme : "dark"))
+  },[viewMode, dispatch]);
 
   return (
     <Routes>

@@ -6,7 +6,6 @@ const api = new APIClient();
 
 // postForgetPwd
 const forgetPwd = (data: any) => {
-  console.log("AQUI", data);
   api.create(`${url.GET_USERS}${url.POST_PASSWORD_FORGET}`, {
     email: data,
   });
