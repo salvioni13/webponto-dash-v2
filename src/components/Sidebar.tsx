@@ -5,6 +5,8 @@ import { AiOutlineCalendar, AiOutlineFolder, AiOutlineHome } from 'react-icons/a
 import { FiUsers } from 'react-icons/fi';
 import { BsBarChartLine, BsBoxSeam } from 'react-icons/bs';
 
+import logo from '../assets/images/icon.svg';
+
 const navigation = [
   {
     name: 'Dashboard',
@@ -77,11 +79,13 @@ const Sidebar = () => {
 
   return (
     <div className="flex flex-col flex-grow border-r border-gray-200 dark:border-gray-600 pt-5 pb-4 bg-white dark:bg-gray-800 overflow-y-auto w-80 h-screen">
-      <div className="flex items-center flex-shrink-0 px-4">
+      <div className="flex items-center justify-center flex-shrink-0 px-4">
         <img
-          className="h-8 w-auto"
-          src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
+          className=""
+          // src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
+          src={logo}
           alt="Workflow"
+          width={"30px"}
         />
       </div>
       <div className="mt-5 flex-grow flex flex-col">
