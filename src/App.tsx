@@ -10,6 +10,9 @@ import { ProtectedUser } from './routes/ProtectedUser';
 import { useAppDispatch, useAppSelector } from './hooks';
 import { changeLayoutMode } from './redux/layout/layoutSlicer';
 import './main.css';
+import { getLoggedUser } from './api/apiCore';
+import { getUser } from './api';
+import { authentication } from './redux/users/userSlicer';
 
 
 function App() {
@@ -21,6 +24,10 @@ function App() {
     if(!viewMode)
     dispatch(changeLayoutMode(theme ? theme : "dark"))
   },[viewMode, dispatch]);
+
+useEffect(()=>{
+  dispatch(authentication())
+},[])
 
   return (
     <Routes>

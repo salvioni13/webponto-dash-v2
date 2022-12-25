@@ -26,6 +26,8 @@ export const ProtectedAdmin = () => {
       }else{
         navTo("/")
       }
+    }else{
+      navTo("/")
     }
   },[loggedUser])
 

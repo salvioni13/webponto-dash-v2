@@ -1,74 +1,80 @@
 /* This example requires Tailwind CSS v2.0+ */
+import React, {useState} from 'react';
 import { Disclosure } from '@headlessui/react'
-
 import { AiOutlineCalendar, AiOutlineFolder, AiOutlineHome } from 'react-icons/ai';
 import { FiUsers } from 'react-icons/fi';
 import { BsBarChartLine, BsBoxSeam } from 'react-icons/bs';
 
 import logo from '../assets/images/icon.svg';
 
-const navigation = [
+interface menuOption {
+  key: string,
+  name: string,
+  icon: any,
+  href: string,
+  children: any,
+}
+
+const navigation: menuOption[] = [
   {
+    key: 'dashboard',
     name: 'Dashboard',
     icon: AiOutlineHome,
-    current: false,
-    href: '#'
+    href: '#',
+    children: null
   },
   {
-    name: 'Team',
+    key:'ocurrences',
+    name: 'O',
     icon: FiUsers,
-    current: true,
-    children: [
-      { name: 'Overview', href: '#' },
-      { name: 'Members', href: '#' },
-      { name: 'Calendar', href: '#' },
-      { name: 'Settings', href: '#' },
-    ],
-  },
-  {
-    name: 'Projects',
-    icon: AiOutlineFolder,
-    current: false,
-    children: [
-      { name: 'Overview', href: '#' },
-      { name: 'Members', href: '#' },
-      { name: 'Calendar', href: '#' },
-      { name: 'Settings', href: '#' },
-    ],
-  },
-  {
-    name: 'Calendar',
-    icon: AiOutlineCalendar,
-    current: false,
-    children: [
-      { name: 'Overview', href: '#' },
-      { name: 'Members', href: '#' },
-      { name: 'Calendar', href: '#' },
-      { name: 'Settings', href: '#' },
-    ],
-  },
-  {
-    name: 'Documents',
-    icon: BsBoxSeam,
-    current: false,
-    children: [
-      { name: 'Overview', href: '#' },
-      { name: 'Members', href: '#' },
-      { name: 'Calendar', href: '#' },
-      { name: 'Settings', href: '#' },
-    ],
-  },
-  {
-    name: 'Reports',
-    icon: BsBarChartLine,
-    current: false,
-    children: [
-      { name: 'Overview', href: '#' },
-      { name: 'Members', href: '#' },
-      { name: 'Calendar', href: '#' },
-      { name: 'Settings', href: '#' },
-    ],
-  },
+    href: '#',
+    children: null
+   
+  }
+  // {
+  //   name: 'Projects',
+  //   icon: AiOutlineFolder,
+  //   current: false,
+  //   children: [
+  //     { name: 'Overview', href: '#' },
+  //     { name: 'Members', href: '#' },
+  //     { name: 'Calendar', href: '#' },
+  //     { name: 'Settings', href: '#' },
+  //   ],
+  // },
+  // {
+  //   name: 'Calendar',
+  //   icon: AiOutlineCalendar,
+  //   current: false,
+  //   children: [
+  //     { name: 'Overview', href: '#' },
+  //     { name: 'Members', href: '#' },
+  //     { name: 'Calendar', href: '#' },
+  //     { name: 'Settings', href: '#' },
+  //   ],
+  // },
+  // {
+  //   name: 'Documents',
+  //   icon: BsBoxSeam,
+  //   current: false,
+  //   children: [
+  //     { name: 'Overview', href: '#' },
+  //     { name: 'Members', href: '#' },
+  //     { name: 'Calendar', href: '#' },
+  //     { name: 'Settings', href: '#' },
+  //   ],
+  // },
+  // {
+  //   name: 'Reports',
+  //   icon: BsBarChartLine,
+  //   current: false,
+  //   children: [
+  //     { name: 'Overview', href: '#' },
+  //     { name: 'Members', href: '#' },
+  //     { name: 'Calendar', href: '#' },
+  //     { name: 'Settings', href: '#' },
+  //   ],
+  // },
 ]
 
 function classNames(...classes: any[]) {
@@ -76,6 +82,8 @@ function classNames(...classes: any[]) {
 }
 
 const Sidebar = () => {
+
+  const [active, setActive] = useState<string>();
 
   return (
     <div className="flex flex-col flex-grow border-r border-gray-200 dark:border-gray-600 pt-5 pb-4 bg-white dark:bg-gray-800 overflow-y-auto w-80 h-screen">
@@ -94,17 +102,18 @@ const Sidebar = () => {
             !item.children ? (
               <div key={item.name}>
                 <a
+                 onClick={() => setActive(item.name)}
                   href="#"
                   className={classNames(
-                    item.current
-                      ? 'bg-gray-100 text-gray-900'
+                    active === item.name
+                      ? 'bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-indigo-300'
                       : 'bg-white text-gray-600 dark:bg-gray-800 dark:text-gray-300 hover:bg-gray-50 hover:text-gray-900',
-                    'group w-full flex items-center pl-2 py-2 text-sm font-medium rounded-md'
+                    'group w-full flex items-center pl-2 pr-1 py-2 text-left text-sm font-medium rounded-md focus:outline-none hover:ring-2 hover:ring-indigo-500'
                   )}
                 >
                   <item.icon
                     className={classNames(
-                      item.current ? 'text-gray-500 dark:text-white' : 'text-gray-400 group-hover:text-gray-500',
+                      active === item.name ? 'text-gray-500 dark:text-white' : 'text-gray-400 group-hover:text-gray-500',
                       'mr-3 flex-shrink-0 h-6 w-6'
                     )}
                     aria-hidden="true"
@@ -118,7 +127,7 @@ const Sidebar = () => {
                   <>
                     <Disclosure.Button
                       className={classNames(
-                        item.current
+                        active === item.name
                           ? 'bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-indigo-300'
                           : 'bg-white text-gray-600 dark:bg-gray-800 dark:text-gray-300 hover:bg-gray-50 hover:text-gray-900',
                         'group w-full flex items-center pl-2 pr-1 py-2 text-left text-sm font-medium rounded-md focus:outline-none hover:ring-2 hover:ring-indigo-500'
@@ -141,8 +150,9 @@ const Sidebar = () => {
                       </svg>
                     </Disclosure.Button>
                     <Disclosure.Panel className="space-y-1">
-                      {item.children.map((subItem) => (
+                      {item?.children?.map((subItem: any) => (
                         <Disclosure.Button
+                          onClick={() => setActive(subItem.name)}
                           key={subItem.name}
                           as="a"
                           href={subItem.href}

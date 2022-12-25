@@ -14,12 +14,13 @@ const forgetPwd = (data: any) => {
 const postLogout = () =>
   api.create(url.POST_LOGOUT, {}, { withCredentials: true });
 
-const postAuthenticate = () =>
-  api.get(url.POST_AUTHENTICATE, { withCredentials: true });
+const postAuthenticate = () => {
+  return api.get(url.POST_AUTHENTICATE, { withCredentials: true });
+};
 
-
-const postJwtLogin = (data: any) =>{
-  return api.create('/authentication/login', data, { withCredentials: true })};
+const postJwtLogin = (data: any) => {
+  return api.create("/authentication/login", data, { withCredentials: true });
+};
 
 // Register Method
 const register = (data: any) => {
@@ -45,10 +46,7 @@ const recoverPassword = (
   userId: IUser["id"],
   { password, verifyToken }: { password: string; verifyToken: string }
 ) => {
-  return api.update(
-    ``,
-    { password, verifyToken }
-  );
+  return api.update(``, { password, verifyToken });
 };
 
 const sendEmailVerification = () => {

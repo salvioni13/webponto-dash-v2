@@ -1,6 +1,6 @@
 import { createAction, createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { callbackify } from "util";
-import { getUser, postAuthenticate, postJwtLogin } from "../../api";
+import { postAuthenticate, postJwtLogin, postLogout } from "../../api";
 import { setLoggedInUser } from "../../helpers/authentication_helper";
 import { RootState } from "../store";
 import { IUser } from "./types";
@@ -28,6 +28,14 @@ export const login = createAsyncThunk(
   "users/loginAction",
   async (user: IUser) => {
     const response = await postJwtLogin(user);
+    return response;
+  }
+);
+
+export const logout = createAsyncThunk(
+  "users/logoutAction",
+  async () => {
+    const response = await postLogout();
     return response;
   }
 );
@@ -61,6 +69,16 @@ export const counterSlice = createSlice({
       .addCase(login.fulfilled, (state: any, action: any) => {
         setLoggedInUser(action.payload);
         state.loggedUser = action.payload;
+      })
+      .addCase(logout.pending, (state: any) => {
+        state.loggedUser = null;
+      })
+      .addCase(logout.rejected, (state: any) => {
+        state.status = "failed";
+      })
+      .addCase(logout.fulfilled, (state: any, action: any) => {
+        setLoggedInUser(null);
+        state.loggedUser = null;
       })
       .addCase(authentication.pending, (state: any) => {
         state.loggedUser = null;

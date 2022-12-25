@@ -7,6 +7,8 @@ import { WiSolarEclipse } from 'react-icons/wi'
 import { BsMoon } from 'react-icons/bs'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { changeLayoutMode } from '../redux/layout/layoutSlicer'
+import { logout } from '../redux/users/userSlicer'
+import { useNavigate } from 'react-router-dom'
 
 
 const navigation = [
@@ -30,6 +32,7 @@ const Topbar = () => {
   const toggleTheme = useCallback(() => {
     dispatch(changeLayoutMode(viewMode === "light" ? "dark" : "light"))
   }, [dispatch, viewMode])
+  const navigate = useNavigate();
 
   return (
     <div className='fixed right-2 top-2'>
@@ -99,10 +102,14 @@ const Topbar = () => {
                         <Menu.Item>
                           {({ active }: any) => (
                             <a
+                            onClick={()=> {
+                              dispatch(logout());
+                              navigate("/");
+                            }}
                               href="#"
                               className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                             >
-                              Sign out
+                              Logout
                             </a>
                           )}
                         </Menu.Item>
