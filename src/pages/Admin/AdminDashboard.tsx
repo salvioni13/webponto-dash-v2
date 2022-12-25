@@ -5,6 +5,7 @@ import { authentication } from "../../redux/users/userSlicer";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import Sidebar from "../../components/Sidebar";
 import  Topbar  from "../../components/Topbar";
+import CSelector from "../../components/ComponentSelector";
 const AdminDashboard = () => {
 
   const {Users: {loggedUser }} = useAppSelector((state)=> ({Users: state.Users}))
@@ -23,9 +24,10 @@ const AdminDashboard = () => {
 
   const year = new Date().getFullYear();
   return (
-    <div className="h-screen dark:bg-gray-900 relative">
+    <div className="h-screen dark:bg-gray-900 relative flex">
       <Sidebar key="sidebar-nav"/>
       <Topbar key="topbar-profile"/>
+      <CSelector />
     </div>
   )
 }

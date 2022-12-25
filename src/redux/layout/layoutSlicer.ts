@@ -3,10 +3,12 @@ import { RootState } from "../store";
 
 export interface LayoutState {
   readonly viewMode: 'light' | 'dark' | null;
+  readonly component: string | null;
 }
 
 export const initialState: LayoutState = {
-    viewMode: null
+    viewMode: null,
+    component: null
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -45,6 +47,9 @@ export const layoutSlicer = createSlice({
     setViewMode: (state, action: any) => {
       state.viewMode = action.payload.data;
     },
+    setActiveComponent: (state, action: PayloadAction<string>) => {
+      state.component = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -61,7 +66,7 @@ export const layoutSlicer = createSlice({
   },
 });
 
-export const {setViewMode} = layoutSlicer.actions;
+export const {setViewMode, setActiveComponent} = layoutSlicer.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

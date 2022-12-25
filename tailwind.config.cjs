@@ -4,7 +4,11 @@ module.exports = {
     darkMode: 'class',
     lightMode: 'class',
     theme: {
-        extend: {},
+        extend: {
+            transitionProperty: {
+                'width': 'width'
+            },
+        },
     },
     plugins: [],
 };

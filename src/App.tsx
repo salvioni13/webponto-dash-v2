@@ -39,8 +39,8 @@ useEffect(()=>{
         <Route path="" element={<UsersDashboard />} />
       </Route>
 
-      <Route path="/admin" element={<ProtectedAdmin />}>
-        <Route path="" element={<AdminDashboard />} />
+      <Route  path="/admin" element={<ProtectedAdmin />}>
+        <Route  path="" element={<AdminDashboard />} />
       </Route>
     </Routes>
   );
